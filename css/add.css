@@ -1,0 +1,256 @@
+
+.addcontainer{
+background-color: rgb(255, 255, 255);
+padding: 20px;
+border-radius: 1em;
+width:50%;
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+}
+h4{width: 200px;}
+.addrow{
+    width: 100%;
+    display: grid; 
+    grid-template-columns: 2fr 3fr; 
+    gap: 0px 20px; 
+    align-items: center;
+}
+.addrow3{
+    width: 100%;
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    gap: 0px 20px; 
+}
+
+
+.addslagon{
+    font-size: 0.8em;
+    
+}
+
+.container-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-right: 10px;
+}
+
+/* Hide the browser's default checkbox */
+.container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+
+}
+
+/* Create a custom checkbox */
+.container-checkbox .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container-checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container-checkbox input:checked ~ .checkmark {
+    background-color: #008cff;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.container-checkbox .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-checkbox .checkmark:after {
+    left: 7px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.addbtn{
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color:rgb(132, 0, 255);
+    transform:skewX(170deg);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1em;
+    box-shadow: rgb(0 0 0 / 20%) 0px 6px 9px 0px;
+}
+
+.addinput{
+    border: 2px solid rgb(132, 0, 255);
+    outline: none;
+    width: 95%;
+    height: 40px;
+     padding-left: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.addinput:focus{
+    box-shadow: rgb(0 0 0 / 20%) 0px 6px 9px 0px;
+    border: 2px solid rgba(132, 0, 255,0.5);
+}
+
+
+.txt12{
+  
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 3px;
+}
+
+.custom-radio{
+    margin-right: 5px;
+}
+
+
+#recipient-name:focus{
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 20%) ;
+    border-color: red;
+}
+
+
+  
+  .file-upload {
+    background-color: #ffffff;
+
+    margin: 0 auto;
+
+  }
+  
+  .file-upload-btn {
+    width: 100%;
+    margin: 0;
+    color: #fff;
+    background: #1FB264;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    border-bottom: 4px solid #15824B;
+    transition: all .2s ease;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  
+  .file-upload-btn:hover {
+    background: #1AA059;
+    color: #ffffff;
+    transition: all .2s ease;
+    cursor: pointer;
+  }
+  
+  .file-upload-btn:active {
+    border: 0;
+    transition: all .2s ease;
+  }
+  
+  .file-upload-content {
+    display: none;
+    text-align: center;
+  }
+  
+  .file-upload-input {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .image-upload-wrap {
+    margin-top: 10px;
+    border: 4px dashed #1FB264;
+    position: relative;
+  }
+  
+  .image-dropping,
+  .image-upload-wrap:hover {
+    background-color: #1FB264;
+    border: 4px dashed #ffffff;
+  }
+  
+  .image-title-wrap {
+    padding: 0 15px 15px 15px;
+    color: #222;
+  }
+  
+  .drag-text {
+    text-align: center;
+  }
+  
+  .drag-text h3 {
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #15824B;
+    padding: 60px 0;
+  }
+  
+  .file-upload-image {
+    max-height: 200px;
+    max-width: 300px;
+    margin: auto;
+ 
+  }
+  
+  .remove-image {
+    width: 200px;
+    margin: 0;
+    color: #fff;
+    background: #cd4535;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    border-bottom: 4px solid #b02818;
+    transition: all .2s ease;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  
+  .remove-image:hover {
+    background: #c13b2a;
+    color: #ffffff;
+    transition: all .2s ease;
+    cursor: pointer;
+  }
+  
+  .remove-image:active {
+    border: 0;
+    transition: all .2s ease;
+  }

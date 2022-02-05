@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/add.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Оруулах</button>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Эд зүйлээ оруулах</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Барааны гарчиг</label>
+            <input type="text" class="form-control" id="recipient-name" placeholder="I Phone X гар утас; Нолууран цамц г.м">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Сонгоно уу</label>
+            <div class="custom-control custom-checkbox mb-3 ">
+                <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
+                <label class="custom-control-label" for="customControlValidation1">Солино</label>
+              </div>
+            <div class="custom-control custom-radio mb-3 custom-control-inline">
+                <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
+                <label class="custom-control-label" for="customControlValidation2">Зарна</label>
+              </div>
+              <div class="custom-control custom-radio mb-3 custom-control-inline">
+                <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
+                <label class="custom-control-label" for="customControlValidation3">Үнэгүй</label>
+              
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Та хэдээр үнэлж байна </label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">₮</div>
+                </div>
+                <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="100000">
+              </div>
+            <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="customControlValidation4" >
+                <label class="custom-control-label" for="customControlValidation4">Үнэ тохиролцоно</label>
+              </div>
+            
+          </div>
+          <label for="recipient-name" class="col-form-label">Төлөв сонгох</label>
+          <div class="form-group " >
+    
+            <div class="custom-control-inline ">
+                <div class="custom-control custom-radio col-sm">
+                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">Шинэ</label>
+                  </div>
+                  <div class="custom-control custom-radio col-sm">
+                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">Шинэвтэр</label>
+                  </div>
+                  <div class="custom-control custom-radio col-sm">
+                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio3">Хуучин</label>
+                  </div>
+            </div>
+           
+          </div>
+
+          <div class="form-group">
+            <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+            <script>
+                function readURL(input) {
+  if (input.files && input.files[0]) {
+
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('.image-upload-wrap').hide();
+
+      $('.file-upload-image').attr('src', e.target.result);
+      $('.file-upload-content').show();
+
+      $('.image-title').html(input.files[0].name);
+    };
+
+    reader.readAsDataURL(input.files[0]);
+
+  } else {
+    removeUpload();
+  }
+}
+
+function removeUpload() {
+  $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+  $('.file-upload-content').hide();
+  $('.image-upload-wrap').show();
+}
+$('.image-upload-wrap').bind('dragover', function () {
+		$('.image-upload-wrap').addClass('image-dropping');
+	});
+	$('.image-upload-wrap').bind('dragleave', function () {
+		$('.image-upload-wrap').removeClass('image-dropping');
+});
+
+            </script>
+                      <label for="recipient-name" class="col-form-label">Зураг оруулах</label>
+            <div class="file-upload">
+            
+            
+              <div class="image-upload-wrap">
+                <input class="file-upload-input" type='file' multiple onchange="readURL(this);" accept="image/*" />
+                <div class="drag-text">
+                  <h3>зураг сонгох</h3>
+                </div>
+              </div>
+              <div class="file-upload-content">
+                <img class="file-upload-image" src="#" alt="your image" />
+                <div class="image-title-wrap">
+                  <button type="button" onclick="removeUpload()" class="remove-image">Remove </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Нэмэлт мэдээлэл</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Буцах</button>
+        <button type="submit" class="btn btn-primary">Оруулах</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<form action="">
+    <div class="addcontainer">
+
+       <div class="addrow">
+           <h3>Ангилал</h3>
+      
+   <select name="cars" id="select" class="">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+   </select>
+       </div>
+
+       <div> <h1>Барааны мэдээлэл</h1></div>
+
+       <div>
+<div class="addrow">
+     <h3>Барааны гарчиг</h3>
+     <div>
+         <input type="text" class="addinput" name="" id="" placeholder="I Phone X гар утас; Нолууран цамц г.м">
+         <p class="addslagon"></p>
+    </div>
+    </div>
+
+<div class="addrow">
+    <h4>Сонгоно уу</h4>
+    <div class="addrow3">
+        <label class="container-checkbox">Cолино
+            <input type="checkbox" >
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-checkbox">Үнэгүй
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-checkbox">Зарна
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+        
+    </div>
+</div>
+
+<div class="addrow"> 
+    <h4>Үнэ тохиролцоно</h4>
+    <div>
+        <input type="text" class="addinput">
+        <label class="container-checkbox txt12">Үнэ тохиролцоно
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+    </div>
+</div>
+<div class="addrow">
+    <h4>Төлөв сонгох</h4>
+    <div class="addrow3">
+        <label class="container-checkbox">Шинэ
+            <input type="checkbox" >
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-checkbox">Шинэвтэр
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-checkbox">Хуучин
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+        
+    </div>
+</div>
+<div class="addrow">
+    <h4>Эд зүйлийн зураг</h4>
+    <div>
+        <input type="file">
+        <span>Дээд тал 3 зураг</span>
+    </div>
+</div>
+<div class="addrow">
+    <h4>Нэмэлт мэдээлэл</h4>
+    <div>
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+    </div>
+</div>
+
+<div class="addrow"> <h3>Борлуулагчын мэдээлэл</h3></div>
+<div class="addrow">
+    <h4>утас</h4>
+    <div><span>85777732</span></div>
+
+    
+</div>
+<div class="addrow">
+    <h4>Хаяг</h4>
+    <div><span>Баянгол дүүрэг</span></div>
+    
+    
+</div>
+       </div>
+
+
+
+       <button class="addbtn"> Нэмэх</button>
+    </div>
+
+</form>
+</body>
+</html>
