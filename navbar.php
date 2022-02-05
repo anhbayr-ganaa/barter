@@ -1,3 +1,57 @@
+
+
+<?php
+
+include_once('config.php');
+
+if (!$conn)  {
+  die('Холбогдож чадсангүй: ' . mysqli_error());
+} 
+
+// hereglegchiin id orj irne
+$userid="";
+$userName="";
+$userPhone="";
+$userAddress="";
+
+//ed zuiliin  medeelel orj irne 
+
+
+
+
+if(isset($_POST['send']))
+{
+  $itemType=$_POST['itemType'];
+  $itemName=$_POST['itemName'];
+  $itemPick=$_POST['itemPick'];
+  $itemRadio=$_POST['itemRadio'];
+  $itemPrice=$_POST['itemPrice'];
+  $itemNegotiete=$_POST['itemNegotiete'];
+  $itemState=$_POST['itemState'];
+  $itemDesc=$_POST['itemDesc'];
+
+$sql="INSERT INTO items ( itemName, itemPick, itemRadio, itemPrice, itemNegotiete, itemstate, itemDesc)
+VALUES ( $itemName, $itemPick ,$itemRadio, $itemPrice, $itemNegotiete, $itemState, $itemDesc)";
+
+
+if (!mysqli_query($conn,$sql))  
+  {
+      die('Error: ' . mysqli_error());
+    }
+    echo "<script>Амжилттай нэмэгдлээ</script>";
+    
+    
+} 
+
+
+mysqli_close($conn);
+?>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,19 +126,19 @@
 
 <script>
   // Designed by:  Mauricio Bucardo
-// Original image:
-// https://dribbble.com/shots/5619509-Animated-Tab-Bar
+ // Original image:
+ // https://dribbble.com/shots/5619509-Animated-Tab-Bar
 
-"use strict"; 
+ "use strict"; 
 
-const body = document.body;
-const bgColorsBody = ["#ffb457", "#ff96bd", "#9999fb", "#ffe797", "#cffff1"];
-const menu = body.querySelector(".menu");
-const menuItems = menu.querySelectorAll(".menu__item");
-const menuBorder = menu.querySelector(".menu__border");
-let activeItem = menu.querySelector(".active");
+  const body = document.body;
+  const bgColorsBody = ["#ffb457", "#ff96bd", "#9999fb", "#ffe797", "#cffff1"];
+ const menu = body.querySelector(".menu");
+ const menuItems = menu.querySelectorAll(".menu__item");
+ const menuBorder = menu.querySelector(".menu__border");
+ let activeItem = menu.querySelector(".active");
 
-function clickItem(item, index) {
+ function clickItem(item, index) {
 
     menu.style.removeProperty("--timeOut");
     
@@ -101,33 +155,35 @@ function clickItem(item, index) {
     offsetMenuBorder(activeItem, menuBorder);
     
     
-}
+  } 
 
-function offsetMenuBorder(element, menuBorder) {
+   function offsetMenuBorder(element, menuBorder) {
 
     const offsetActiveItem = element.getBoundingClientRect();
     const left = Math.floor(offsetActiveItem.left - menu.offsetLeft - (menuBorder.offsetWidth  - offsetActiveItem.width) / 2) +  "px";
     menuBorder.style.transform = `translate3d(${left}, 0 , 0)`;
 
-}
+  }
 
-offsetMenuBorder(activeItem, menuBorder);
+  offsetMenuBorder(activeItem, menuBorder);
 
-menuItems.forEach((item, index) => {
+ menuItems.forEach((item, index) => {
 
     item.addEventListener("click", () => clickItem(item, index));
     
-})
+  })
 
-window.addEventListener("resize", () => {
+  window.addEventListener("resize", () => {
     offsetMenuBorder(activeItem, menuBorder);
     menu.style.setProperty("--timeOut", "none");
-});
+  });
 </script>
-         
+
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+   
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Эд зүйлээ оруулах</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -135,37 +191,42 @@ window.addEventListener("resize", () => {
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form method="POST"  enctype="multipart/form-data">
+
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Барааны гарчиг</label>
-            <input type="text" class="form-control" id="recipient-name" placeholder="I Phone X гар утас; Нолууран цамц г.м">
+            <input type="text" class="form-control" name="itemName"  id="recipient-name" placeholder="I Phone X гар утас; Нолууран цамц г.м">
           </div>
+
           <div class="form-group">
+
             <label for="recipient-name" class="col-form-label">Сонгоно уу</label>
             <div class="custom-control custom-checkbox mb-3 ">
-                <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
+                <input type="checkbox" class="custom-control-input" name="itemPick" value="1" id="customControlValidation1" required>
                 <label class="custom-control-label" for="customControlValidation1">Солино</label>
               </div>
             <div class="custom-control custom-radio mb-3 custom-control-inline">
-                <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
+                <input type="radio" class="custom-control-input" value="Зарна" name="itemRadio" id="customControlValidation2" name="radio-stacked" required>
                 <label class="custom-control-label" for="customControlValidation2">Зарна</label>
               </div>
               <div class="custom-control custom-radio mb-3 custom-control-inline">
-                <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
+                <input type="radio" class="custom-control-input" value="Үнэгүй" name="itemRadio" id="customControlValidation3" name="radio-stacked" required>
                 <label class="custom-control-label" for="customControlValidation3">Үнэгүй</label>
               
               </div>
           </div>
+
+
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Та хэдээр үнэлж байна </label>
             <div class="input-group">
                 <div class="input-group-prepend">
                   <div class="input-group-text">₮</div>
                 </div>
-                <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="100000">
+                <input type="text" class="form-control" name="itemPrice" id="inlineFormInputGroupUsername" placeholder="100000">
               </div>
             <div class="custom-control custom-checkbox mb-3">
-                <input type="checkbox" class="custom-control-input" id="customControlValidation4" >
+                <input type="checkbox" class="custom-control-input" name="itemNegotiete" value="0" id="customControlValidation4" >
                 <label class="custom-control-label" for="customControlValidation4">Үнэ тохиролцоно</label>
               </div>
             
@@ -175,15 +236,15 @@ window.addEventListener("resize", () => {
     
             <div class="custom-control-inline ">
                 <div class="custom-control custom-radio col-sm">
-                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                    <input type="radio" id="customRadio1" value="Шинэ" name="itemState" class="custom-control-input">
                     <label class="custom-control-label" for="customRadio1">Шинэ</label>
                   </div>
                   <div class="custom-control custom-radio col-sm">
-                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                    <input type="radio" id="customRadio2" value="Шинэвтэр" name="itemState" class="custom-control-input">
                     <label class="custom-control-label" for="customRadio2">Шинэвтэр</label>
                   </div>
                   <div class="custom-control custom-radio col-sm">
-                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                    <input type="radio" id="customRadio3" value="Хуучин" name="itemState" class="custom-control-input">
                     <label class="custom-control-label" for="customRadio3">Хуучин</label>
                   </div>
             </div>
@@ -193,13 +254,13 @@ window.addEventListener("resize", () => {
           <div class="form-group">
             <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
-            <script>
+<script>
                 function readURL(input) {
-  if (input.files && input.files[0]) {
+     if (input.files && input.files[0]) {
 
     var reader = new FileReader();
 
-    reader.onload = function(e) {
+      reader.onload = function(e) {
       $('.image-upload-wrap').hide();
 
       $('.file-upload-image').attr('src', e.target.result);
@@ -210,24 +271,24 @@ window.addEventListener("resize", () => {
 
     reader.readAsDataURL(input.files[0]);
 
-  } else {
+    } else {
     removeUpload();
-  }
-}
+    }
+   }
 
-function removeUpload() {
+   function removeUpload() {
   $('.file-upload-input').replaceWith($('.file-upload-input').clone());
   $('.file-upload-content').hide();
   $('.image-upload-wrap').show();
-}
-$('.image-upload-wrap').bind('dragover', function () {
+  }
+   $('.image-upload-wrap').bind('dragover', function () {
 		$('.image-upload-wrap').addClass('image-dropping');
 	});
 	$('.image-upload-wrap').bind('dragleave', function () {
 		$('.image-upload-wrap').removeClass('image-dropping');
-});
+    });
 
-            </script>
+</script>
                       <label for="recipient-name" class="col-form-label">Зураг оруулах</label>
             <div class="file-upload">
             
@@ -249,18 +310,19 @@ $('.image-upload-wrap').bind('dragover', function () {
 
           <div class="form-group">
             <label for="message-text" class="col-form-label">Нэмэлт мэдээлэл</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <textarea class="form-control" name="itemDesc" id="message-text"></textarea>
           </div>
-        </form>
+     
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Буцах</button>
-        <button type="submit" class="btn btn-primary">Оруулах</button>
+        <button type="submit" name="send" class="btn btn-primary">Оруулах</button>
       </div>
+
     </div>
   </div>
 </div>
-
+</form>
 
 <div class="container">
 
