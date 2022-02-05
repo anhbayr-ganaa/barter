@@ -1,51 +1,5 @@
 
-
-<?php
-
-include_once('config.php');
-
-if (!$conn)  {
-  die('Холбогдож чадсангүй: ' . mysqli_error());
-} 
-
-// hereglegchiin id orj irne
-$userid="";
-$userName="";
-$userPhone="";
-$userAddress="";
-
-//ed zuiliin  medeelel orj irne 
-
-
-
-
-if(isset($_POST['send']))
-{
-  $itemType=$_POST['itemType'];
-  $itemName=$_POST['itemName'];
-  $itemPick=$_POST['itemPick'];
-  $itemRadio=$_POST['itemRadio'];
-  $itemPrice=$_POST['itemPrice'];
-  $itemNegotiete=$_POST['itemNegotiete'];
-  $itemState=$_POST['itemState'];
-  $itemDesc=$_POST['itemDesc'];
-
-$sql="INSERT INTO items ( itemName, itemPick, itemRadio, itemPrice, itemNegotiete, itemstate, itemDesc)
-VALUES ( $itemName, $itemPick ,$itemRadio, $itemPrice, $itemNegotiete, $itemState, $itemDesc)";
-
-
-if (!mysqli_query($conn,$sql))  
-  {
-      die('Error: ' . mysqli_error());
-    }
-    echo "<script>Амжилттай нэмэгдлээ</script>";
-    
-    
-} 
-
-
-mysqli_close($conn);
-?>
+<?php include('config.php');   ?>
 
 
 
@@ -191,26 +145,45 @@ mysqli_close($conn);
         </button>
       </div>
       <div class="modal-body">
-        <form method="POST"  enctype="multipart/form-data">
+        <form method="POST" action="send.php"  enctype="multipart/form-data">
+          <select name="itemType" id="itemType" required>
+ 
+
+         <option value="false">Ангилалууд</option>
+
+         <?php 
+    include('config.php');
+ 	  $types=mysqli_query($conn,"select * from types  ");
+    while($row=mysqli_fetch_array($types))
+		{
+      ?>
+           <option value="<?php echo $row[0]; ?>">  <?php echo $row[1]; ?> </option>
+
+      <?php
+     }
+         ?>
+   
+          </select>
+
 
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Барааны гарчиг</label>
-            <input type="text" class="form-control" name="itemName"  id="recipient-name" placeholder="I Phone X гар утас; Нолууран цамц г.м">
+            <input required type="text" class="form-control" name="itemName"  id="recipient-name" placeholder="I Phone X гар утас; Нолууран цамц г.м">
           </div>
 
           <div class="form-group">
 
             <label for="recipient-name" class="col-form-label">Сонгоно уу</label>
             <div class="custom-control custom-checkbox mb-3 ">
-                <input type="checkbox" class="custom-control-input" name="itemPick" value="1" id="customControlValidation1" required>
+                <input type="checkbox" class="custom-control-input" name="itemPick" value="1" id="customControlValidation1" >
                 <label class="custom-control-label" for="customControlValidation1">Солино</label>
               </div>
             <div class="custom-control custom-radio mb-3 custom-control-inline">
-                <input type="radio" class="custom-control-input" value="Зарна" name="itemRadio" id="customControlValidation2" name="radio-stacked" required>
+                <input type="radio" class="custom-control-input" value="Зарна" name="itemRadio" id="customControlValidation2" name="radio-stacked">
                 <label class="custom-control-label" for="customControlValidation2">Зарна</label>
               </div>
               <div class="custom-control custom-radio mb-3 custom-control-inline">
-                <input type="radio" class="custom-control-input" value="Үнэгүй" name="itemRadio" id="customControlValidation3" name="radio-stacked" required>
+                <input type="radio" class="custom-control-input" value="Үнэгүй" name="itemRadio" id="customControlValidation3" name="radio-stacked">
                 <label class="custom-control-label" for="customControlValidation3">Үнэгүй</label>
               
               </div>
@@ -226,7 +199,7 @@ mysqli_close($conn);
                 <input type="text" class="form-control" name="itemPrice" id="inlineFormInputGroupUsername" placeholder="100000">
               </div>
             <div class="custom-control custom-checkbox mb-3">
-                <input type="checkbox" class="custom-control-input" name="itemNegotiete" value="0" id="customControlValidation4" >
+                <input type="checkbox" class="custom-control-input" name="itemNegotiete" value="1" id="customControlValidation4" >
                 <label class="custom-control-label" for="customControlValidation4">Үнэ тохиролцоно</label>
               </div>
             
@@ -236,15 +209,15 @@ mysqli_close($conn);
     
             <div class="custom-control-inline ">
                 <div class="custom-control custom-radio col-sm">
-                    <input type="radio" id="customRadio1" value="Шинэ" name="itemState" class="custom-control-input">
+                    <input type="radio" id="customRadio1" value="Шинэ" name="itemState" class="custom-control-input"required >
                     <label class="custom-control-label" for="customRadio1">Шинэ</label>
                   </div>
                   <div class="custom-control custom-radio col-sm">
-                    <input type="radio" id="customRadio2" value="Шинэвтэр" name="itemState" class="custom-control-input">
+                    <input type="radio" id="customRadio2" value="Шинэвтэр" name="itemState" class="custom-control-input" required>
                     <label class="custom-control-label" for="customRadio2">Шинэвтэр</label>
                   </div>
                   <div class="custom-control custom-radio col-sm">
-                    <input type="radio" id="customRadio3" value="Хуучин" name="itemState" class="custom-control-input">
+                    <input type="radio" id="customRadio3" value="Хуучин" name="itemState" class="custom-control-input" required>
                     <label class="custom-control-label" for="customRadio3">Хуучин</label>
                   </div>
             </div>
@@ -254,7 +227,7 @@ mysqli_close($conn);
           <div class="form-group">
             <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
-<script>
+   <script>
                 function readURL(input) {
      if (input.files && input.files[0]) {
 
@@ -288,7 +261,7 @@ mysqli_close($conn);
 		$('.image-upload-wrap').removeClass('image-dropping');
     });
 
-</script>
+          </script>
                       <label for="recipient-name" class="col-form-label">Зураг оруулах</label>
             <div class="file-upload">
             
@@ -321,10 +294,11 @@ mysqli_close($conn);
 
     </div>
   </div>
-</div>
-</form>
+   </div>
+  </form>
 
-<div class="container">
+
+  <div class="container">
 
 
   
