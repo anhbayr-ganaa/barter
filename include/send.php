@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=s, initial-scale=1.0">
-    <title>Document</title>
+    <title>hi</title>
 </head>
 <body>
 <?php include('config.php');   ?>
@@ -19,14 +19,14 @@ $userAddress="";
 //
 
 
-if($_POST['itemPick']==" "){
-  $itemPick=0;
-} else { $itemPick=1;}
+if($_POST['itemPick']==1){
+  $itemPick=1;
+} else { $itemPick=0;}
 
-if($_POST['itemNegotiete']==" "){
-  $itemNegotiete=0;
-} else { 
+if($_POST['itemNegotiete']==1){
   $itemNegotiete=1;
+} else { 
+  $itemNegotiete=0;
 }
   $itemType=$_POST['itemType'];
   $itemName=$_POST['itemName'];

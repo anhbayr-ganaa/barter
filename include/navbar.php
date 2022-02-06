@@ -1,4 +1,13 @@
 
+<?php
+session_start();
+error_reporting(0);
+include('config.php');
+include('include/checklogin.php');
+check_login();
+echo $_SESSION['id'];
+?>
+
 
 
 
@@ -12,7 +21,6 @@
 
 <link rel="stylesheet" href="botcss/navbar.css">
 <link rel="stylesheet" href="css/add.css">
-<link rel="stylesheet" href="css/card.css">
 
 <!--bootstrap 4-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -29,18 +37,21 @@
    <div class="body">
   <menu class="menu container">
     
-  <button class="menu__item active" data-toggle="modal" onclick="location.href='login.php'" data-target="#exampleModal" data-whatever="@mdo" style="--bgColorItem: #ff8c00;" >
-   
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon" id="Outline" viewBox="0 0 24 24" width="512" height="512"><path d="M23,11H13V1a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1V11H1a1,1,0,0,0-1,1H0a1,1,0,0,0,1,1H11V23a1,1,0,0,0,1,1h0a1,1,0,0,0,1-1V13H23a1,1,0,0,0,1-1h0A1,1,0,0,0,23,11Z"/></svg>
+    <button class="menu__item active" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="--bgColorItem: #ff8c00;" >
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M3.8,6.6h16.4"/>
+        <path d="M20.2,12.1H3.8"/>
+        <path d="M3.8,17.5h16.4"/>
+      </svg>
     </button>
 
-    <button class="menu__item" style="--bgColorItem: #f54888;" onclick="location">
+    <button class="menu__item" style="--bgColorItem: #f54888;">
       <svg class="icon" viewBox="0 0 24 24">
         <path  d="M6.7,4.8h10.7c0.3,0,0.6,0.2,0.7,0.5l2.8,7.3c0,0.1,0,0.2,0,0.3v5.6c0,0.4-0.4,0.8-0.8,0.8H3.8
         C3.4,19.3,3,19,3,18.5v-5.6c0-0.1,0-0.2,0.1-0.3L6,5.3C6.1,5,6.4,4.8,6.7,4.8z"/>
         <path  d="M3.4,12.9H8l1.6,2.8h4.9l1.5-2.8h4.6"/>
       </svg>
-  </button>
+    </button>
 
     <button class="menu__item" style="--bgColorItem: #4343f5;" >
       <svg class="icon" viewBox="0 0 24 24">
@@ -128,7 +139,7 @@
   });
 </script>
 
-<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
    
@@ -304,25 +315,6 @@
   
 </div>
 
-                    -->
 
-
-                    <div class="container">
-                        
-                    <div class="card">
-                 
-                 <div class="imgover"><img src="images/1.jpg" alt="Avatar" class="cardimg"></div> 
-                 <div class="cardcontainer">
-                   <h4><b>Эвхэгддэг ширээ</b></h4> 
-                   <p class="desc">Hover over the div element below, to efewfsee the transition effect:</p> 
-                   <div class="row"> 
-                     <p>3 tsagiin </p>
-                     <button> </button>
-                   </div>
-                 
-                 </div>
-               </div>
-
-                    </div>
 </body>
 </html>
