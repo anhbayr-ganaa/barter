@@ -3,7 +3,7 @@
 session_start();
 error_reporting(0);
 include('config.php');
-include('include/checklogin.php');
+include('checklogin.php');
 check_login();
 echo $_SESSION['id'];
 ?>
@@ -19,8 +19,8 @@ echo $_SESSION['id'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="botcss/navbar.css">
-<link rel="stylesheet" href="css/add.css">
+<link rel="stylesheet" href="../botcss/navbar.css">
+<link rel="stylesheet" href="../css/add.css">
 
 <!--bootstrap 4-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
