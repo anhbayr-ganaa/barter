@@ -15,9 +15,7 @@
 <form  method="post" enctype="multipart/form-data">
     Select Image Files to Upload:
     <input type="file" name="files[]" multiple >
-    <input type="text"  name="name" >
-    <input type="text"  name="number">
-    <input  type="text" name="password">
+  
     <input type="submit" name="submit" value="UPLOAD">
 
     <?php   $text= "1"; echo  gettype( $text);  ?><br>
@@ -27,8 +25,31 @@
     ?>
 </form>
 
+<form  method="post">
+<input type="text"  name="name" >
+    <input type="text"  name="number">
+    <input  type="text" name="password">
+    <input type="submit" name="utga" value="UPLOAD2">
+</form>
 
+ <?php
+ include('config.php'); 
 
+ if(isset($_POST['utga'])){
+    $name=$_POST['name'];
+    $number=$_POST['number'];
+    $password=$_POST['password'];
+    
+    $sql = "INSERT INTO turshilt (gname, gnumber, gpassword)
+    VALUES ('".$name."', $number, '".$password."')";
+    
+    if ($conn->query($sql) === TRUE) {
+      echo "New record created successfully";
+    } else {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+ }
+ ?>
 
 
 
@@ -44,7 +65,7 @@ if(isset($_POST['submit'])){
     $imageCount=count($_FILES['files']['name']);
 
 
-  
+    $sql = "INSERT INTO `turshilt` (`id`, `gname`, `gnumber`, `gpassword`) VALUES (NULL, 'sdfsadf', '4564564', 'dsafsadfsad');";
 
    $userid=5;
     for($i=0; $i<$imageCount; $i++){
@@ -56,20 +77,7 @@ if(isset($_POST['submit'])){
          
             $result=mysqli_query($conn,$upload);
         }
-    } 
-    $name=$_POST['name'];
-    $number=$_POST['number'];
-    $password=$_POST['password'];
-
-    $sql = "INSERT INTO turshilt (gname, gnumber, gpassword)
-    VALUES ('".$name."', $number, '".$password."')";
-    
-    if ($conn->query($sql) === TRUE) {
-      echo "New record created successfully";
-    } else {
-      echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-    if($result){
+    } if($result){
        echo "amhilttai";
     }
 

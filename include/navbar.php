@@ -5,48 +5,52 @@ error_reporting(0);
 include('config.php');
 include('checklogin.php');
 check_login();
-
+ echo $_SESSION['id'];
 ?>
 <?php 
 // Include the database configuration file 
 include_once 'config.php'; 
- 
+ $userid=$_SESSION['id'];
+
 if(isset($_POST['submit'])){ 
 $randomnumber=(rand(10,10000000000));
 
 $imageCount=count($_FILES['files']['name']);
 
 
-
-
-$userid=5;
 for($i=0; $i<$imageCount; $i++){
-    $imageName= $_FILES['files']['name'][$i];
-    $imageTempName=$_FILES['files']['tmp_name'][$i];
-    $targetPath="images/".$imageName;
-    if(move_uploaded_file($imageTempName,$targetPath)){
-        $upload="INSERT INTO images(imagename,useridfx,itemidfx ) VALUES('$imageName',$userid,$randomnumber)";
-     
-        $result=mysqli_query($conn,$upload);
-    }
-} 
-$name=$_POST['name'];
-$number=$_POST['number'];
-$password=$_POST['password'];
+  $imageName= $_FILES['files']['name'][$i];
+  $imageTempName=$_FILES['files']['tmp_name'][$i];
+  $targetPath="images/".$imageName;
+  if(move_uploaded_file($imageTempName,$targetPath)){
+      $upload="INSERT INTO images (useridfx,itemidfx,imagename ) VALUES ('$userid','$randomnumber','$imageName')";
+      $result=mysqli_query($conn,$upload);
+  }
+}  if($result){
 
-$sql = "INSERT INTO turshilt (gname, gnumber, gpassword)
-VALUES ('".$name."', $number, '".$password."')";
-
-if ($conn->query($sql) === TRUE) {
-  echo "New record created successfully";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
+  $itemType=$_POST['itemType'];
+  $itemName=$_POST['itemName'];
+  $itemPick=$_POST['itemPick'];
+  $itemRadio=$_POST['itemRadio'];
+  $itemPrice=$_POSt['itemPrice'];
+  $itemNegotiete=$_POST['itemNegotiete'];
+  $itemState=$_POST['itemState'];
+  $itemDesc=$_POST['itemDesc'];
+  $sql = "INSERT INTO items (itemsUserid, randomnumber, itemTypefx, itemName,itemPick, itemRadio,itemPrice,itemNegotiete, itemState, itemDesc)
+  VALUES ('$userid', '$randomnumber', '$itemType','".$itemName."',$itemPick,'".$itemRadio."', '$itemPrice', '$itemNegotiete' , '".$itemState."','".$itemDesc."')";
+  
+  if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully";
+  } else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
+  
+} else { 
+  echo "aldaa garlaa zurag orsongue ";
 }
-if($result){
-   echo "amhilttai";
-}
 
-}else echo "aldaa garlaa ";
+
+};
 ?>
 
 
@@ -284,7 +288,7 @@ if($result){
           </div>
 
           <div class="form-group">
-            <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+           
 
       
                       <label for="recipient-name" class="col-form-label">Зураг оруулах</label>
@@ -292,17 +296,12 @@ if($result){
             
             
               <div class="image-upload-wrap">
-                <input multiple class="file-upload-input" type='file' name="files[]" multiple onchange="readURL(this);" accept="image/*" />
+              <input type="file" name="files[]" multiple >
                 <div class="drag-text">
                   <h3>зураг сонгох</h3>
                 </div>
               </div>
-              <div class="file-upload-content">
-                <img class="file-upload-image" src="#" alt="your image" />
-                <div class="image-title-wrap">
-                  <button type="button" onclick="removeUpload()" class="remove-image">Remove </button>
-                </div>
-              </div>
+            
             </div>
           </div>
 
@@ -315,7 +314,7 @@ if($result){
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Буцах</button>
-        <button type="submit" name="send" class="btn btn-primary">Оруулах</button>
+        <button type="submit" name="submit" class="btn btn-primary">Оруулах</button>
       </div>
       <p value="<?php  $_SESSION['id'];   ?>" name="userid"><?php echo  $_SESSION['id'];   ?></p>
     </div>
