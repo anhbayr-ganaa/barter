@@ -10,11 +10,11 @@
 <?php include('config.php');   ?>
    <?php
 // hereglegchiin id orj irne
-$userid="";
+
 $userName="";
 $userPhone="";
 $userAddress="";
-
+$userid=$_SESSION['id'];
 //ed zuiliin  medeelel orj irne 
 //
 
@@ -36,18 +36,38 @@ if($_POST['itemNegotiete']==1){
   $itemState=$_POST['itemState'];
   $itemDesc=$_POST['itemDesc'];
 
-$sql="INSERT INTO items (itemTypefx, itemName, itemPick, itemRadio, itemPrice, itemNegotiete, itemstate, itemDesc)
-VALUES ('".$itemType."','".$itemName."', '".$itemPick."' ,'".$itemRadio."', '".$itemPrice."','".$itemNegotiete."','".$itemState."', '".$itemDesc."')";
+$sql="INSERT INTO items (itemsUserid,itemTypefx, itemName, itemPick, itemRadio, itemPrice, itemNegotiete, itemstate, itemDesc)
+VALUES ('".$userid."','".$itemType."','".$itemName."', '".$itemPick."' ,'".$itemRadio."', '".$itemPrice."','".$itemNegotiete."','".$itemState."', '".$itemDesc."')";
+  $imageCount=count($_FILES['files']['name']);
 
+  for($i=0; $i<$imageCount; $i++){
+      $imageName= $_FILES['files']['name'][$i];
+      $imageTempName=$_FILES['files']['tmp_name'][$i];
+      $targetPath="images/".$imageName;
+      if(move_uploaded_file($imageTempName,$targetPath)){
+          $upload="INSERT INTO images(imagename,useridfx,itemidfx ) VALUES('$imageName','$userid',1)";
+          $result=mysqli_query($conn,$upload);
+      }
+  } //if($result){
+     // echo "amjiltttai upload hiile";
+  //}
   
 if ($conn->query($sql) === TRUE) {
-    header("location: navbar.php");
+   // header("location: navbar.php");
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
   }
 
 
 
+
+?>
+
+
+<?php 
+// Include the database configuration file 
+
+  
 
 ?>
 </body>

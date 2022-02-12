@@ -5,8 +5,50 @@ error_reporting(0);
 include('config.php');
 include('checklogin.php');
 check_login();
-echo $_SESSION['id'];
+
 ?>
+<?php 
+// Include the database configuration file 
+include_once 'config.php'; 
+ 
+if(isset($_POST['submit'])){ 
+$randomnumber=(rand(10,10000000000));
+
+$imageCount=count($_FILES['files']['name']);
+
+
+
+
+$userid=5;
+for($i=0; $i<$imageCount; $i++){
+    $imageName= $_FILES['files']['name'][$i];
+    $imageTempName=$_FILES['files']['tmp_name'][$i];
+    $targetPath="images/".$imageName;
+    if(move_uploaded_file($imageTempName,$targetPath)){
+        $upload="INSERT INTO images(imagename,useridfx,itemidfx ) VALUES('$imageName',$userid,$randomnumber)";
+     
+        $result=mysqli_query($conn,$upload);
+    }
+} 
+$name=$_POST['name'];
+$number=$_POST['number'];
+$password=$_POST['password'];
+
+$sql = "INSERT INTO turshilt (gname, gnumber, gpassword)
+VALUES ('".$name."', $number, '".$password."')";
+
+if ($conn->query($sql) === TRUE) {
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
+if($result){
+   echo "amhilttai";
+}
+
+}else echo "aldaa garlaa ";
+?>
+
 
 
 
@@ -21,11 +63,13 @@ echo $_SESSION['id'];
 
 <link rel="stylesheet" href="../botcss/navbar.css">
 <link rel="stylesheet" href="../css/add.css">
+<link rel="stylesheet" href="../css/canvas.css">
 
 <!--bootstrap 4-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
+<script src="../js/canvas.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -34,6 +78,10 @@ echo $_SESSION['id'];
     <title></title>
 </head>
 <body>
+<canvas class="orb-canvas"></canvas>
+<script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
+
+
    <div class="body">
   <menu class="menu container">
     
@@ -150,11 +198,11 @@ echo $_SESSION['id'];
         </button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="send.php"  enctype="multipart/form-data">
+        <form method="POST"  enctype="multipart/form-data">
           <select name="itemType" id="itemType" required>
  
 
-         <option value="false">Ангилалууд</option>
+
 
          <?php 
     include('config.php');
@@ -238,47 +286,13 @@ echo $_SESSION['id'];
           <div class="form-group">
             <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
-          <script>
-                function readURL(input) {
-                     if (input.files && input.files[0]) {
-
-                        var reader = new FileReader();
-
-                       reader.onload = function(e) {
-                       $('.image-upload-wrap').hide();
-
-                    $('.file-upload-image').attr('src', e.target.result);
-                      $('.file-upload-content').show();
-
-                   $('.image-title').html(input.files[0].name);
-                            };
-
-                        reader.readAsDataURL(input.files[0]);
-
-                          } else {
-                        removeUpload();
-                          }
-                       }
-
-                        function removeUpload() {
-                    $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-                    $('.file-upload-content').hide();
-                    $('.image-upload-wrap').show();
-                       }
-                   $('.image-upload-wrap').bind('dragover', function () {
-	               	$('.image-upload-wrap').addClass('image-dropping');
-	                         });
-	                        $('.image-upload-wrap').bind('dragleave', function () {
-	                 	$('.image-upload-wrap').removeClass('image-dropping');
-                      });
-          
-       </script>
+      
                       <label for="recipient-name" class="col-form-label">Зураг оруулах</label>
             <div class="file-upload">
             
             
               <div class="image-upload-wrap">
-                <input class="file-upload-input" type='file' multiple onchange="readURL(this);" accept="image/*" />
+                <input multiple class="file-upload-input" type='file' name="files[]" multiple onchange="readURL(this);" accept="image/*" />
                 <div class="drag-text">
                   <h3>зураг сонгох</h3>
                 </div>
@@ -294,6 +308,7 @@ echo $_SESSION['id'];
 
           <div class="form-group">
             <label for="message-text" class="col-form-label">Нэмэлт мэдээлэл</label>
+        
             <textarea class="form-control" name="itemDesc" id="message-text"></textarea>
           </div>
      
@@ -302,7 +317,7 @@ echo $_SESSION['id'];
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Буцах</button>
         <button type="submit" name="send" class="btn btn-primary">Оруулах</button>
       </div>
-
+      <p value="<?php  $_SESSION['id'];   ?>" name="userid"><?php echo  $_SESSION['id'];   ?></p>
     </div>
   </div>
    </div>
